@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './Input.scss';
+import { MenuItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
-import { MenuItem } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { arrayOf } from 'prop-types';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class Input extends Component {
 
@@ -18,19 +21,16 @@ class Input extends Component {
       question: '',
       inputType: '',
       answer: '',
-      test: {
-        value: 'value',
-        value2: 'value2'
-      },
-      parentInputType: this.props.parentInputType 
+      condition: '',
+      // parentInputType: this.props.parentInputType
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      parentInputType: nextProps.parentInputType
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     answer: ''
+  //   });
+  // }
 
   deleteSelf = () => {
     this.props.onComponentDelete(this.props.selfIndex);
@@ -63,7 +63,7 @@ class Input extends Component {
   }
 
   render() {
-    let inputs = this.state.parentInputType === undefined ? [this.state.question, this.state.inputType] : [this.state.question, this.state.inputType, this.state.answer]
+    let inputs = this.props.parentInputType === undefined ? [this.state.question, this.state.inputType] : [this.state.question, this.state.inputType, this.state.answer];
     let child = this.state.childrensData.map((data) => {
       return <Input key={data.key} selfIndex={data.key} parentInputType={this.state.inputType} onComponentDelete={this.deleteComponent}>
       </Input>
@@ -74,11 +74,34 @@ class Input extends Component {
         <CardContent>
           
       {child}
-          <TextField label="AAA" type="number" value={this.state.question} name="question" onChange={this.checkValidation} required></TextField>
-          <Select value={this.state.inputType} name="inputType" onClick={this.checkValidation} required>
-            {Object.values(this.state.test).map((data) => <MenuItem value={data}>{data}</MenuItem>)}
-          </Select>
-          {this.state.parentInputType ? <TextField label="Answer" type="text" value={this.state.answer} name='answer' onChange={this.checkValidation} required></TextField> : null}
+          {
+            this.props.parentInputType ? 
+            <Select label="Condition" value={this.state.condition} name="condition" onClick={this.checkValidation} required>
+            {
+              this.props.parentInputType === "Number" ? 
+              ["Equals", "Greather than", "Less than"].map((data, index) => <MenuItem value={data} key={index}>{data}</MenuItem>) :
+              ["Equals"].map((data, index) => <MenuItem value={data} key={index}>{data}</MenuItem>)
+            }
+          </Select> : null
+          }
+
+          {
+            this.props.parentInputType ? 
+            this.props.parentInputType !== "Yes/No" ?
+          <TextField label="Answer" type={this.props.parentInputType === "Text" ? "text" : "number"} value={this.state.answer} name='answer' onChange={this.checkValidation} required></TextField> : 
+          <RadioGroup label="Answer" name="answer" value={this.state.answer} onChange={this.checkValidation}>
+          {
+            ["Yes", "No"].map((data, index) => <FormControlLabel value={data} key={index} control={<Radio />} label={data} />)
+          }
+          </RadioGroup> : null
+          }
+
+          <TextField label="Question" type="text" value={this.state.question} name="question" onChange={this.checkValidation} required></TextField>
+          <Select label="InputType" value={this.state.inputType} name="inputType" onClick={this.checkValidation} required>
+            {
+              ["Text", "Number", "Yes/No"].map((data, index) => <MenuItem value={data} key={index}>{data}</MenuItem>)
+            }
+          </Select> 
           <Button variant="contained" color="primary" disabled={!this.validate(inputs)} onClick={this.addComponent}>Add SubInput</Button>
           <Button variant="contained" color="secondary" onClick={this.deleteSelf}>Remove</Button>
           
