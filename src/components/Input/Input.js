@@ -22,15 +22,8 @@ class Input extends Component {
       inputType: '',
       answer: '',
       condition: '',
-      // parentInputType: this.props.parentInputType
     }
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     answer: ''
-  //   });
-  // }
 
   deleteSelf = () => {
     this.props.onComponentDelete(this.props.selfIndex);
