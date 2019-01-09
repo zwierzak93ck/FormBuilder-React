@@ -8,18 +8,16 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class Input extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       childrensData: [],
-      question: '',
-      inputType: '',
+      question: props.question !== undefined ? props.question : '',
+      inputType: props.inputType !== undefined ? props.inputType : '',
       answer: '',
       condition: '',
     }
@@ -32,7 +30,7 @@ class Input extends Component {
   checkValidation = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    });
+    }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
 
   validate = (inputs) => {
@@ -97,7 +95,7 @@ class Input extends Component {
           </Select> 
           <Button variant="contained" color="primary" disabled={!this.validate(inputs)} onClick={this.addComponent}>Add SubInput</Button>
           <Button variant="contained" color="secondary" onClick={this.deleteSelf}>Remove</Button>
-          
+          <p>{this.props.selfIndex}</p>
         </CardContent>
       </Card>
     );

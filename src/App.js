@@ -58,7 +58,6 @@ class App extends Component {
 
   componentWillMount() {
     var openedDataBase;
-    var data;
     this.openDataBase().then(result => {
       openedDataBase = result;
     }).then(() => {
@@ -71,8 +70,7 @@ class App extends Component {
   generateComponents = (data) => {
     this.setState({
       childrensData: data.data
-    }, 
-    console.log(this.state.childrensData));
+    });
   }
 
   componentDidMount() {
@@ -90,10 +88,27 @@ class App extends Component {
     }
   }
 
+  saveChildData = (data, key) => {
+    let child = this.state.childrensData.filter(x => x.key === key)[0];
+    let childIndex = this.state.childrensData.indexOf(child);
+    let dataToAdd = {question: data.question, inputType: data.inputType}
+    this.setState(state => {
+      const childrensData = state.childrensData.map((element, index) => {
+        if(childIndex === index) {
+          return {...child, ...dataToAdd}
+        } else {
+          return element;
+        }
+      })
+      return {
+        childrensData
+      }
+    });
+  }
+
   render() {
-    console.log(this.state.childrensData)
     let child = this.state.childrensData.map((data) => {
-      return <Input key={data.key} selfIndex={data.key} onComponentDelete={this.deleteComponent}>
+      return <Input key={data.key} selfIndex={data.key} onComponentDelete={this.deleteComponent} onComponentChange={this.saveChildData} question={data.question} inputType={data.inputType}>
       </Input>
     });
     return (
