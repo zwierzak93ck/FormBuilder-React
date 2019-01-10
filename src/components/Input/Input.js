@@ -42,7 +42,7 @@ class Input extends Component {
   addComponent = () => {
     this.setState({
       childrensData: [...this.state.childrensData, { key: Date.now() + Math.random() }]
-    });
+    }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
 
   deleteComponent = (index) => {
@@ -53,10 +53,28 @@ class Input extends Component {
     });
   }
 
+  saveChildData = (data, key) => {
+    let child = this.state.childrensData.filter(x => x.key === key)[0];
+    let childIndex = this.state.childrensData.indexOf(child);
+    let dataToAdd = {question: data.question, inputType: data.inputType, answer: data.answer, condition: data.condition, childrensData: data.childrensData}
+    this.setState(state => {
+      const childrensData = state.childrensData.map((element, index) => {
+        if(childIndex === index) {
+          return {...child, ...dataToAdd}
+        } else {
+          return element;
+        }
+      })
+      return {
+        childrensData
+      }
+    }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
+  }
+
   render() {
     let inputs = this.props.parentInputType === undefined ? [this.state.question, this.state.inputType] : [this.state.question, this.state.inputType, this.state.answer];
     let child = this.state.childrensData.map((data) => {
-      return <Input key={data.key} selfIndex={data.key} parentInputType={this.state.inputType} onComponentDelete={this.deleteComponent}>
+      return <Input key={data.key} selfIndex={data.key} parentInputType={this.state.inputType} onComponentDelete={this.deleteComponent} onComponentChange={this.saveChildData}>
       </Input>
     });
 

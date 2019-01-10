@@ -89,9 +89,11 @@ class App extends Component {
   }
 
   saveChildData = (data, key) => {
+    console.log(this.state)
+    console.log(data)
     let child = this.state.childrensData.filter(x => x.key === key)[0];
     let childIndex = this.state.childrensData.indexOf(child);
-    let dataToAdd = {question: data.question, inputType: data.inputType}
+    let dataToAdd = {question: data.question, inputType: data.inputType, answer: data.answer, condition: data.condition, childrensData: data.childrensData}
     this.setState(state => {
       const childrensData = state.childrensData.map((element, index) => {
         if(childIndex === index) {
