@@ -1,13 +1,13 @@
 {
-  "main.css": "/nazwa/static/css/main.663be296.chunk.css",
-  "main.js": "/nazwa/static/js/main.0f2e8baf.chunk.js",
-  "main.js.map": "/nazwa/static/js/main.0f2e8baf.chunk.js.map",
-  "static/js/1.a73aba86.chunk.js": "/nazwa/static/js/1.a73aba86.chunk.js",
-  "static/js/1.a73aba86.chunk.js.map": "/nazwa/static/js/1.a73aba86.chunk.js.map",
-  "runtime~main.js": "/nazwa/static/js/runtime~main.34243893.js",
-  "runtime~main.js.map": "/nazwa/static/js/runtime~main.34243893.js.map",
-  "static/css/main.663be296.chunk.css.map": "/nazwa/static/css/main.663be296.chunk.css.map",
-  "index.html": "/nazwa/index.html",
-  "precache-manifest.bd5696370e212639665ba08d2a0c7602.js": "/nazwa/precache-manifest.bd5696370e212639665ba08d2a0c7602.js",
-  "service-worker.js": "/nazwa/service-worker.js"
+  "main.css": "/FormBuilder-React/static/css/main.663be296.chunk.css",
+  "main.js": "/FormBuilder-React/static/js/main.0f2e8baf.chunk.js",
+  "main.js.map": "/FormBuilder-React/static/js/main.0f2e8baf.chunk.js.map",
+  "static/js/1.a73aba86.chunk.js": "/FormBuilder-React/static/js/1.a73aba86.chunk.js",
+  "static/js/1.a73aba86.chunk.js.map": "/FormBuilder-React/static/js/1.a73aba86.chunk.js.map",
+  "runtime~main.js": "/FormBuilder-React/static/js/runtime~main.176c3c20.js",
+  "runtime~main.js.map": "/FormBuilder-React/static/js/runtime~main.176c3c20.js.map",
+  "static/css/main.663be296.chunk.css.map": "/FormBuilder-React/static/css/main.663be296.chunk.css.map",
+  "index.html": "/FormBuilder-React/index.html",
+  "precache-manifest.5e78cadb0b1b9384928b2305ec61fbef.js": "/FormBuilder-React/precache-manifest.5e78cadb0b1b9384928b2305ec61fbef.js",
+  "service-worker.js": "/FormBuilder-React/service-worker.js"
 }
