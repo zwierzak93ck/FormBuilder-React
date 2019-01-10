@@ -15,11 +15,11 @@ class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childrensData: [],
+      childrensData: props.childrensData !== undefined ? props.childrensData : [],
       question: props.question !== undefined ? props.question : '',
       inputType: props.inputType !== undefined ? props.inputType : '',
-      answer: '',
-      condition: '',
+      answer: props.answer !== undefined ? props.answer : '',
+      condition: props.condition !== undefined ? props.condition : '',
     }
   }
 
@@ -50,7 +50,7 @@ class Input extends Component {
 
     this.setState({
       childrensData: result
-    });
+    }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
 
   saveChildData = (data, key) => {
@@ -72,17 +72,15 @@ class Input extends Component {
   }
 
   render() {
-    let inputs = this.props.parentInputType === undefined ? [this.state.question, this.state.inputType] : [this.state.question, this.state.inputType, this.state.answer];
+    let inputs = this.props.parentInputType === undefined ? [this.state.question, this.state.inputType] : [this.state.question, this.state.inputType, this.state.answer, this.state.condition];
     let child = this.state.childrensData.map((data) => {
-      return <Input key={data.key} selfIndex={data.key} parentInputType={this.state.inputType} onComponentDelete={this.deleteComponent} onComponentChange={this.saveChildData}>
+      return <Input key={data.key} selfIndex={data.key} parentInputType={this.state.inputType} onComponentDelete={this.deleteComponent} onComponentChange={this.saveChildData} question={data.question} inputType={data.inputType} childrensData={data.childrensData} answer={data.answer} condition={data.condition}>
       </Input>
     });
 
     return (
       <Card>
         <CardContent>
-          
-      {child}
           {
             this.props.parentInputType ? 
             <Select label="Condition" value={this.state.condition} name="condition" onClick={this.checkValidation} required>
@@ -113,7 +111,7 @@ class Input extends Component {
           </Select> 
           <Button variant="contained" color="primary" disabled={!this.validate(inputs)} onClick={this.addComponent}>Add SubInput</Button>
           <Button variant="contained" color="secondary" onClick={this.deleteSelf}>Remove</Button>
-          <p>{this.props.selfIndex}</p>
+          {child}
         </CardContent>
       </Card>
     );

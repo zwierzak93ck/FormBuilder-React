@@ -89,8 +89,6 @@ class App extends Component {
   }
 
   saveChildData = (data, key) => {
-    console.log(this.state)
-    console.log(data)
     let child = this.state.childrensData.filter(x => x.key === key)[0];
     let childIndex = this.state.childrensData.indexOf(child);
     let dataToAdd = {question: data.question, inputType: data.inputType, answer: data.answer, condition: data.condition, childrensData: data.childrensData}
@@ -110,8 +108,14 @@ class App extends Component {
 
   render() {
     let child = this.state.childrensData.map((data) => {
-      return <Input key={data.key} selfIndex={data.key} onComponentDelete={this.deleteComponent} onComponentChange={this.saveChildData} question={data.question} inputType={data.inputType}>
-      </Input>
+      return <Input key={data.key} 
+                    selfIndex={data.key} 
+                    onComponentDelete={this.deleteComponent} 
+                    onComponentChange={this.saveChildData} 
+                    question={data.question} 
+                    inputType={data.inputType} 
+                    childrensData={data.childrensData} 
+                    answer={data.answer}> </Input>
     });
     return (
       <div>
