@@ -69,7 +69,7 @@ class App extends Component {
 
   generateComponents = (data) => {
     this.setState({
-      childrensData: data.data
+      childrensData: Object.values(data.data)
     });
   }
 
