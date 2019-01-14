@@ -9,6 +9,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { validate } from '../../services/Validation';
+import { saveChildData } from '../../services/Component';
+import SelectBuilder from '../SelectBuilder'
 
 class Input extends Component {
 
@@ -33,12 +36,6 @@ class Input extends Component {
     }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
 
-  validate = (inputs) => {
-    return inputs.every(element => {
-      return element.length > 0
-    });
-  }
-
   addComponent = () => {
     this.setState({
       childrensData: [...this.state.childrensData, { key: Date.now() + Math.random() }]
@@ -54,21 +51,16 @@ class Input extends Component {
   }
 
   saveChildData = (data, key) => {
-    let child = this.state.childrensData.filter(x => x.key === key)[0];
-    let childIndex = this.state.childrensData.indexOf(child);
-    let dataToAdd = { question: data.question, inputType: data.inputType, answer: data.answer, condition: data.condition, childrensData: data.childrensData }
-    this.setState(state => {
-      const childrensData = state.childrensData.map((element, index) => {
-        if (childIndex === index) {
-          return { ...child, ...dataToAdd }
-        } else {
-          return element;
-        }
-      })
-      return {
-        childrensData
-      }
-    }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
+    this.setState({
+      childrensData: Object.values(saveChildData(this.state.childrensData, data, key))[0]
+    },
+      () => this.props.onComponentChange(this.state, this.props.selfIndex));
+  }
+
+  test = (state) => {
+    this.setState({
+      [Object.keys(state)[0]]: Object.values(state)[0]
+    }, () => this.props.onComponentChange(this.state, this.props.selfIndex))
   }
 
   render() {
@@ -91,15 +83,8 @@ class Input extends Component {
         <CardContent>
           {
             this.props.parentInputType ?
-              <Select label="Condition" value={this.state.condition} name="condition" onClick={this.checkValidation} required>
-                {
-                  this.props.parentInputType === "Number" ?
-                    ["Equals", "Greather than", "Less than"].map((data, index) =>
-                      <MenuItem value={data} key={index}>{data}</MenuItem>) :
-                    ["Equals"].map((data, index) =>
-                      <MenuItem value={data} key={index}>{data}</MenuItem>)
-                }
-              </Select> : null
+              <SelectBuilder id={Date.now() + Math.random()} name="condition" value={this.state.condition} onComponentChange={this.test}
+                data={this.props.parentInputType === "Number" ? ["Equals", "Greather than", "Less than"] : ["Equals"]} /> : null
           }
 
           {
@@ -127,16 +112,13 @@ class Input extends Component {
             value={this.state.question}
             name="question"
             onChange={this.checkValidation} required></TextField>
-          <Select label="InputType"
-            value={this.state.inputType}
-            name="inputType"
-            onClick={this.checkValidation} required>
-            {
-              ["Text", "Number", "Yes/No"].map((data, index) => <MenuItem value={data} key={index}>{data}</MenuItem>)
-            }
-          </Select>
+
+
+          <SelectBuilder id={Date.now() + Math.random()} name="inputType" value={this.state.inputType} onComponentChange={this.test}
+            data={["Text", "Number", "Yes/No"]} />
+
           <Button variant="contained" color="primary"
-            disabled={!this.validate(inputs)}
+            disabled={!validate(inputs)}
             onClick={this.addComponent}>Add SubInput</Button>
           <Button variant="contained" color="secondary"
             onClick={this.deleteSelf}>Remove</Button>
