@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import './Input.scss';
-import { MenuItem } from '@material-ui/core';
+import './../../styles/styles.scss';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -79,21 +77,30 @@ class Input extends Component {
     });
 
     return (
-      <Card>
+      <Card className="card">
         <CardContent>
+
+        <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+
+        <div className="col-lg-12">
           {
             this.props.parentInputType ?
               <SelectBuilder id={Date.now() + Math.random()} name="condition" value={this.state.condition} onComponentChange={this.test}
                 data={this.props.parentInputType === "Number" ? ["Equals", "Greather than", "Less than"] : ["Equals"]} /> : null
           }
+</div>
 
+<div className="col-lg-12">
           {
             this.props.parentInputType ?
               this.props.parentInputType !== "Yes/No" ?
                 <TextField label="Answer"
                   type={this.props.parentInputType === "Text" ? "text" : "number"}
                   value={this.state.answer} name='answer'
-                  onChange={this.checkValidation} required></TextField> :
+                  onChange={this.checkValidation} required></TextField> : 
+
                 <RadioGroup label="Answer" name="answer"
                   value={this.state.answer}
                   onChange={this.checkValidation}>
@@ -105,23 +112,40 @@ class Input extends Component {
                         control={<Radio />}
                         label={data} />)
                   }
-                </RadioGroup> : null
+                </RadioGroup> 
+                : null
           }
+</div>
 
+<div className="col-lg-12">
           <TextField label="Question" type="text"
             value={this.state.question}
             name="question"
             onChange={this.checkValidation} required></TextField>
+</div>
 
-
+<div className="col-lg-12">
           <SelectBuilder id={Date.now() + Math.random()} name="inputType" value={this.state.inputType} onComponentChange={this.test}
             data={["Text", "Number", "Yes/No"]} />
+</div>
 
+<div className="col-lg-3"></div>
+
+<div className="col-lg-3">
           <Button variant="contained" color="primary"
             disabled={!validate(inputs)}
             onClick={this.addComponent}>Add SubInput</Button>
+</div>
+
+<div className="col-lg-3">
           <Button variant="contained" color="secondary"
             onClick={this.deleteSelf}>Remove</Button>
+            </div>
+            </div>
+        <div className="col-lg-3"></div>
+
+      </div>
+    </div>
           {child}
         </CardContent>
       </Card>

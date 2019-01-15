@@ -25,7 +25,6 @@ class SelectBuilder extends Component {
     
         {this.props.data.map((data, index) =>
             <MenuItem value={data} key={index}>{data}</MenuItem>)}
-      
 </Select>
     );
   }

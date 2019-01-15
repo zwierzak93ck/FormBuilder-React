@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/styles.scss';
 import Input from './components/Input/Input';
 import Button from '@material-ui/core/Button';
 import { openDataBase, loadData, addOrUpdateData } from './services/DataBase';
@@ -78,9 +78,28 @@ class App extends Component {
                     answer={data.answer}> </Input>
     });
     return (
-      <div>
+      <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+
+        <div className="container">
+        <div className="row">
+          <div className="col-lg-4"></div>
+          <div className="col-lg-4">
+
+      
         {child}
         <Button variant="contained" color="primary" onClick={this.addComponent}>Add Input</Button>
+      
+
+      </div>
+      <div className="col-lg-4"></div>
+
+      </div>
+      </div>
+
+      </div>
+      </div>
       </div>
     );
   }
