@@ -5,7 +5,8 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.6",
-    "@material-ui/core": "^3.8.1",
+    "@material-ui/core": "^3.9.0",
+    "@material-ui/icons": "^3.0.2",
     "@svgr/webpack": "2.4.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
@@ -36,6 +37,7 @@
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "material-ui-icons": "^1.0.0-beta.36",
     "mini-css-extract-plugin": "0.4.3",
     "npm": "^6.5.0",
     "office-ui-fabric-react": "^6.125.0",

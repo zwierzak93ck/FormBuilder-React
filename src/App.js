@@ -6,6 +6,10 @@ import Fab from '@material-ui/core/Fab';
 import { openDataBase, loadData, addOrUpdateData } from './services/DataBase';
 import { saveChildData } from './services/Component';
 import { DefaultButton, PrimaryButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
+import Icon from '@material-ui/core/Icon';
+import { Delete} from '@material-ui/icons';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 class App extends Component {
   constructor(props) {
@@ -90,8 +94,8 @@ class App extends Component {
         </div>
         <div className="row">
           <div className="col-sm-4 offset-sm-4 buttonContainer">
-            <Button className="button" variant="contained" color="primary" onClick={this.addComponent}>Add Input</Button>
-            <Fab className="fabButton" color="primary" onClick={this.addComponent}>Add Input</Fab>
+            <Button className="button" variant="contained" color="primary" onClick={this.addComponent}><AddCircleIcon/> Add Input</Button>
+            <Fab className="fabButton" color="primary" onClick={this.addComponent}><AddCircleIcon/></Fab>
           </div>
         </div>
       </div>

@@ -11,6 +11,8 @@ import { validate } from '../../services/Validation';
 import { saveChildData } from '../../services/Component';
 import SelectBuilder from '../SelectBuilder';
 import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {
   DocumentCard,
   DocumentCardActivity,
@@ -33,6 +35,7 @@ class Input extends Component {
   }
 
   deleteSelf = () => {
+    console.log('log')
     this.props.onComponentDelete(this.props.selfIndex);
   }
 
@@ -139,16 +142,16 @@ class Input extends Component {
               <div className="col-sm-12 buttonContainer">
                 <Button className="button" variant="contained" color="primary"
                   disabled={!validate(inputs)}
-                  onClick={this.addComponent}>Add SubInput</Button>
+                  onClick={this.addComponent}><AddCircleIcon/> Add SubInput</Button>
                 <Fab className="fabButton" color="primary"
                   disabled={!validate(inputs)}
-                  onClick={this.addComponent}>Add SubInput</Fab>
+                  onClick={this.addComponent}><AddCircleIcon/></Fab>
               </div>
 
               <div className="col-sm-12 buttonContainer">
                 <Button className="button" variant="contained" color="secondary"
-                  onClick={this.deleteSelf}>Remove</Button>
-                <Fab className="fabButton" color="secondary" onClick={this.deleteself}>Remove</Fab>
+                  onClick={this.deleteSelf}><DeleteIcon/> Remove</Button>
+                <Fab className="fabButton" color="secondary" onClick={this.deleteSelf}><DeleteIcon/></Fab>
               </div>
 
             </div>
@@ -159,7 +162,6 @@ class Input extends Component {
             </div>
           </div>
           
-          {/* </DocumentCard> */}
         </CardContent>
       </Card>
     );
