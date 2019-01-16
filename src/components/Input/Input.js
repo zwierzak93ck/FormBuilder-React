@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './../../styles/styles.scss';
+import '../../styles/styles.scss';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -9,7 +9,15 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { validate } from '../../services/Validation';
 import { saveChildData } from '../../services/Component';
-import SelectBuilder from '../SelectBuilder'
+import SelectBuilder from '../SelectBuilder';
+import Fab from '@material-ui/core/Fab';
+import {
+  DocumentCard,
+  DocumentCardActivity,
+  DocumentCardPreview,
+  DocumentCardTitle,
+  IDocumentCardPreviewProps
+} from 'office-ui-fabric-react/lib/DocumentCard';
 
 class Input extends Component {
 
@@ -79,74 +87,79 @@ class Input extends Component {
     return (
       <Card className="card">
         <CardContent>
+          <div className="container">
+            <div className="row">
 
-        <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
+              <div className="col-sm-12 inputContainer">
+                {
+                  this.props.parentInputType ?
+                    <SelectBuilder id={Date.now() + Math.random()} name="condition" value={this.state.condition} onComponentChange={this.test}
+                      data={this.props.parentInputType === "Number" ? ["Equals", "Greather than", "Less than"] : ["Equals"]} /> : null
+                }
+              </div>
 
-        <div className="col-lg-12">
-          {
-            this.props.parentInputType ?
-              <SelectBuilder id={Date.now() + Math.random()} name="condition" value={this.state.condition} onComponentChange={this.test}
-                data={this.props.parentInputType === "Number" ? ["Equals", "Greather than", "Less than"] : ["Equals"]} /> : null
-          }
-</div>
+              <div className="col-sm-12 inputContainer">
+                {
+                  this.props.parentInputType ?
+                    this.props.parentInputType !== "Yes/No" ?
+                      <TextField className="input" label="Answer"
+                        type={this.props.parentInputType === "Text" ? "text" : "number"}
+                        value={this.state.answer} name='answer'
+                        onChange={this.checkValidation} required></TextField> :
 
-<div className="col-lg-12">
-          {
-            this.props.parentInputType ?
-              this.props.parentInputType !== "Yes/No" ?
-                <TextField label="Answer"
-                  type={this.props.parentInputType === "Text" ? "text" : "number"}
-                  value={this.state.answer} name='answer'
-                  onChange={this.checkValidation} required></TextField> : 
+                      <RadioGroup className="input" label="Answer" name="answer"
+                        value={this.state.answer}
+                        onChange={this.checkValidation}>
+                        {
+                          ["Yes", "No"].map((data, index) =>
+                            <FormControlLabel
+                              value={data}
+                              key={index}
+                              control={<Radio />}
+                              label={data} />)
+                        }
+                      </RadioGroup>
+                    : null
+                }
+              </div>
 
-                <RadioGroup label="Answer" name="answer"
-                  value={this.state.answer}
-                  onChange={this.checkValidation}>
-                  {
-                    ["Yes", "No"].map((data, index) =>
-                      <FormControlLabel
-                        value={data}
-                        key={index}
-                        control={<Radio />}
-                        label={data} />)
-                  }
-                </RadioGroup> 
-                : null
-          }
-</div>
+              <div className="col-sm-12 inputContainer">
+                <TextField className="input" label="Question" type="text"
+                  value={this.state.question}
+                  name="question"
+                  onChange={this.checkValidation} required></TextField>
+              </div>
 
-<div className="col-lg-12">
-          <TextField label="Question" type="text"
-            value={this.state.question}
-            name="question"
-            onChange={this.checkValidation} required></TextField>
-</div>
+              <div className="col-sm-12 inputContainer">
+                <SelectBuilder id={Date.now() + Math.random()} name="inputType" value={this.state.inputType} onComponentChange={this.test}
+                  data={["Text", "Number", "Yes/No"]} />
+              </div>
 
-<div className="col-lg-12">
-          <SelectBuilder id={Date.now() + Math.random()} name="inputType" value={this.state.inputType} onComponentChange={this.test}
-            data={["Text", "Number", "Yes/No"]} />
-</div>
 
-<div className="col-lg-3"></div>
+              <div className="col-sm-12 buttonContainer">
+                <Button className="button" variant="contained" color="primary"
+                  disabled={!validate(inputs)}
+                  onClick={this.addComponent}>Add SubInput</Button>
+                <Fab className="fabButton" color="primary"
+                  disabled={!validate(inputs)}
+                  onClick={this.addComponent}>Add SubInput</Fab>
+              </div>
 
-<div className="col-lg-3">
-          <Button variant="contained" color="primary"
-            disabled={!validate(inputs)}
-            onClick={this.addComponent}>Add SubInput</Button>
-</div>
+              <div className="col-sm-12 buttonContainer">
+                <Button className="button" variant="contained" color="secondary"
+                  onClick={this.deleteSelf}>Remove</Button>
+                <Fab className="fabButton" color="secondary" onClick={this.deleteself}>Remove</Fab>
+              </div>
 
-<div className="col-lg-3">
-          <Button variant="contained" color="secondary"
-            onClick={this.deleteSelf}>Remove</Button>
+            </div>
+            <div className="row">
+            <div className="col-sm-12">
+              {child}
             </div>
             </div>
-        <div className="col-lg-3"></div>
-
-      </div>
-    </div>
-          {child}
+          </div>
+          
+          {/* </DocumentCard> */}
         </CardContent>
       </Card>
     );

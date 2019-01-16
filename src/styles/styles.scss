@@ -27,17 +27,51 @@ $largeDesktops: "(min-device-width: 1200px)";
     }
 }
 
-// .card {
-//     margin: auto;
-//     width: 100%;
-//     margin-bottom: 20px;
-//     margin-top: 20px;
-//     border-radius: 20px;
-//     border-style: solid;
-//     border-width: 0.5px;
-//     border-color: green;
+body {
+    background-color: #e6e6ff !important;
+}
 
-//     @include largeDesktops {
-//         width: 90%;
-//     }
-// } 
+ 
+ .card {
+    margin: 0 auto !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    margin-top: 20px !important;
+    border-radius: 20px !important;
+    border-style: solid !important;
+    border-width: 0.5px !important;
+    border-color: #bfbfbf !important;
+} 
+
+.button {
+    display: none !important;
+}
+
+.fabButton {
+    margin: auto !important;
+}
+
+.buttonContainer {
+    display: inline-flex !important;
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 100% !important;
+}
+
+.inputContainer {
+    text-align: center;
+    width: 100% !important;
+    margin-bottom: 10px;
+}
+
+.input {
+    text-align-last: center;
+    width: inherit;
+
+}
+
+
+
+

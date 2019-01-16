@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MenuItem } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
+import '../styles/styles.scss'
 
 class SelectBuilder extends Component {
 
@@ -21,7 +22,7 @@ class SelectBuilder extends Component {
 
   render() {
     return (
-        <Select value={this.state[this.props.name]} onClick={this.checkValidation} name={this.props.name}>
+        <Select className="input" value={this.state[this.props.name]} onClick={this.checkValidation} name={this.props.name}>
     
         {this.props.data.map((data, index) =>
             <MenuItem value={data} key={index}>{data}</MenuItem>)}
