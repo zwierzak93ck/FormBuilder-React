@@ -14,6 +14,7 @@ class SelectBuilder extends Component {
 
     checkValidation = (e) => {
         if(e.target.value && e.target.name) {
+            console.log(e.target.name)
         this.setState({
             [e.target.name]: e.target.value
           }, () => this.props.onComponentChange(this.state));

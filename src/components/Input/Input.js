@@ -10,9 +10,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { validate } from '../../services/Validation';
 import { saveChildData } from '../../services/Component';
 import SelectBuilder from '../SelectBuilder';
+import ControlBuilder from '../ControlBuilder';
 import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+
 import {
   DocumentCard,
   DocumentCardActivity,
@@ -35,11 +37,11 @@ class Input extends Component {
   }
 
   deleteSelf = () => {
-    console.log('log')
     this.props.onComponentDelete(this.props.selfIndex);
   }
 
   checkValidation = (e) => {
+    console.log(e.target.name)
     this.setState({
       [e.target.name]: e.target.value
     }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
@@ -66,7 +68,7 @@ class Input extends Component {
       () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
 
-  test = (state) => {
+  changeInputType = (state) => {
     this.setState({
       [Object.keys(state)[0]]: Object.values(state)[0]
     }, () => this.props.onComponentChange(this.state, this.props.selfIndex))
@@ -96,7 +98,7 @@ class Input extends Component {
               <div className="col-sm-12 inputContainer">
                 {
                   this.props.parentInputType ?
-                    <SelectBuilder id={Date.now() + Math.random()} name="condition" value={this.state.condition} onComponentChange={this.test}
+                    <SelectBuilder id={Date.now() + Math.random()} name="condition" value={this.state.condition} onComponentChange={this.changeInputType}
                       data={this.props.parentInputType === "Number" ? ["Equals", "Greather than", "Less than"] : ["Equals"]} /> : null
                 }
               </div>
@@ -110,18 +112,21 @@ class Input extends Component {
                         value={this.state.answer} name='answer'
                         onChange={this.checkValidation} required></TextField> :
 
-                      <RadioGroup className="input" label="Answer" name="answer"
-                        value={this.state.answer}
-                        onChange={this.checkValidation}>
-                        {
-                          ["Yes", "No"].map((data, index) =>
-                            <FormControlLabel
-                              value={data}
-                              key={index}
-                              control={<Radio />}
-                              label={data} />)
-                        }
-                      </RadioGroup>
+                      // <RadioGroup className="input radio" label="Answer" name="answer"
+                      //   value={this.state.answer}
+                      //   onChange={this.checkValidation}>
+                      //   {
+                      //     ["Yes", "No"].map((data, index) =>
+                      //       <FormControlLabel
+                      //         value={data}
+                      //         key={index}
+                      //         control={<Radio color="primary" />}
+                      //         label={data} />)
+                      //   }
+                      // </RadioGroup>
+                      <ControlBuilder id={Date.now() + Math.random()} name="answer" value={this.state.answer} 
+                      onComponentChange={this.changeInputType}
+                  data={["Yes", "No"]} control="radio"/>
                     : null
                 }
               </div>
@@ -134,7 +139,7 @@ class Input extends Component {
               </div>
 
               <div className="col-sm-12 inputContainer">
-                <SelectBuilder id={Date.now() + Math.random()} name="inputType" value={this.state.inputType} onComponentChange={this.test}
+                <SelectBuilder id={Date.now() + Math.random()} name="inputType" value={this.state.inputType} onComponentChange={this.changeInputType}
                   data={["Text", "Number", "Yes/No"]} />
               </div>
 
@@ -142,26 +147,26 @@ class Input extends Component {
               <div className="col-sm-12 buttonContainer">
                 <Button className="button" variant="contained" color="primary"
                   disabled={!validate(inputs)}
-                  onClick={this.addComponent}><AddCircleIcon/> Add SubInput</Button>
+                  onClick={this.addComponent}><AddCircleIcon /> Add SubInput</Button>
                 <Fab className="fabButton" color="primary"
                   disabled={!validate(inputs)}
-                  onClick={this.addComponent}><AddCircleIcon/></Fab>
+                  onClick={this.addComponent}><AddCircleIcon /></Fab>
               </div>
 
               <div className="col-sm-12 buttonContainer">
                 <Button className="button" variant="contained" color="secondary"
-                  onClick={this.deleteSelf}><DeleteIcon/> Remove</Button>
-                <Fab className="fabButton" color="secondary" onClick={this.deleteSelf}><DeleteIcon/></Fab>
+                  onClick={this.deleteSelf}><DeleteIcon /> Remove</Button>
+                <Fab className="fabButton" color="secondary" onClick={this.deleteSelf}><DeleteIcon /></Fab>
               </div>
 
             </div>
             <div className="row">
-            <div className="col-sm-12">
-              {child}
-            </div>
+              <div className="col-sm-12">
+                {child}
+              </div>
             </div>
           </div>
-          
+
         </CardContent>
       </Card>
     );
