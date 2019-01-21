@@ -141,6 +141,63 @@ body {
     display: inline !important;
 }
 
+.switch {
+    display: inline !important;
+}
 
+.night {
+        background-color: #393939 !important;
+    .card {
+        background-color: #4d5052;
+        border-color: #333333 !important;
+    }
 
+    .input {
+        input {
+            color: #b7c4d0;
 
+        }
+
+        label {
+            color: #ababca !important;
+        }
+
+        div {
+            color: #b7c4d0 !important;
+        }
+    }
+
+    .radio {
+    label {
+        span {
+            :first-child {
+            color: #b7c4d0 !important;
+            
+            }
+            color: #eff;
+ 
+        }
+
+        
+
+    }
+}
+    .switch {
+        label {
+            span {
+                color: #fff;
+            }
+        }
+    }
+
+    .MuiPaper-root-120 {
+        background-color: #4d5052;
+        ul li {
+            color:#b7c4d0;
+        }
+    }
+
+    .MuiButton-disabled-21 {
+        color: #b7c4d0 !important;
+    }
+}

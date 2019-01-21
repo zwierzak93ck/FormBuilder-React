@@ -33,6 +33,7 @@ class Input extends Component {
       inputType: props.inputType !== undefined ? props.inputType : '',
       answer: props.answer !== undefined ? props.answer : '',
       condition: props.condition !== undefined ? props.condition : '',
+      mode: 'night'
     }
   }
 
@@ -41,7 +42,7 @@ class Input extends Component {
   }
 
   checkValidation = (e) => {
-    console.log(e.target.name)
+    console.log(this.state)
     this.setState({
       [e.target.name]: e.target.value
     }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
@@ -112,18 +113,6 @@ class Input extends Component {
                         value={this.state.answer} name='answer'
                         onChange={this.checkValidation} required></TextField> :
 
-                      // <RadioGroup className="input radio" label="Answer" name="answer"
-                      //   value={this.state.answer}
-                      //   onChange={this.checkValidation}>
-                      //   {
-                      //     ["Yes", "No"].map((data, index) =>
-                      //       <FormControlLabel
-                      //         value={data}
-                      //         key={index}
-                      //         control={<Radio color="primary" />}
-                      //         label={data} />)
-                      //   }
-                      // </RadioGroup>
                       <ControlBuilder id={Date.now() + Math.random()} name="answer" value={this.state.answer} 
                       onComponentChange={this.changeInputType}
                   data={["Yes", "No"]} control="radio"/>
