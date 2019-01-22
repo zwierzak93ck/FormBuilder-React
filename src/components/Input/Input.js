@@ -4,9 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { validate } from '../../services/Validation';
 import { saveChildData } from '../../services/Component';
 import SelectBuilder from '../SelectBuilder';
@@ -15,13 +12,6 @@ import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import {
-  DocumentCard,
-  DocumentCardActivity,
-  DocumentCardPreview,
-  DocumentCardTitle,
-  IDocumentCardPreviewProps
-} from 'office-ui-fabric-react/lib/DocumentCard';
 
 class Input extends Component {
 
@@ -42,7 +32,6 @@ class Input extends Component {
   }
 
   checkValidation = (e) => {
-    console.log(this.state)
     this.setState({
       [e.target.name]: e.target.value
     }, () => this.props.onComponentChange(this.state, this.props.selfIndex));

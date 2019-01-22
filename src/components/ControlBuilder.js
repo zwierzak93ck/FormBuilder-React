@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { MenuItem, FormGroup } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
+import { FormGroup } from '@material-ui/core';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
@@ -12,26 +11,27 @@ class ControlBuilder extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props.name)
     this.state = {
       [props.name]: props.value
     }
-    console.log(this.state)
   }
 
   checkValidation = (e) => {
-    console.log(e.target)
     if (e.target.value && e.target.name) {
+      console.log(e.target.checked);
+      console.log(e.target);
+      if(e.target.checked)
+      {
+        console.log(e.target)
+        console.log(document.getElementsByClassName("radio")[0].childNodes)
+        document.getElementsByClassName("radio")[0].className += " checked";
+      }
       this.setState({
         [e.target.name]: e.target.value
+      }, () => {
+       
       }, () => this.props.onComponentChange(this.state));
-    } else if (e.target.checked) {
-      console.log(e.target.name)
-      console.log(e.target.value)
-      this.setState({
-        nightMode: true
-      }, () => this.props.onComponentChange(this.state));
-    }
+    } 
   }
 
   setControl = (control) => {
@@ -50,7 +50,7 @@ class ControlBuilder extends Component {
           }
         </RadioGroup>
       case "checkbox":
-        return <FormGroup className="input radio" label="Answer"
+        return <FormGroup className="input checkbox" label="Answer"
           value={this.state[this.props.name]}
           onChange={this.checkValidation}
           name={this.props.name}>

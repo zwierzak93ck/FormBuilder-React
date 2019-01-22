@@ -78,12 +78,12 @@ class App extends Component {
     if (this.state.nightMode === false) {
       this.setState({
         nightMode: true
-      },() => document.getElementsByTagName("body")[0].className = "night");
+      }, () => document.getElementsByTagName("body")[0].className = "night");
     }
     else {
       this.setState({
         nightMode: false
-      },() => document.getElementsByTagName("body")[0].className = "");
+      }, () => document.getElementsByTagName("body")[0].className = "");
     }
   }
 
