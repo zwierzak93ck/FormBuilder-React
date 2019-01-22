@@ -20,6 +20,7 @@ class ControlBuilder extends Component {
   }
 
   checkValidation = (e) => {
+    console.log(e.target)
     if (e.target.value && e.target.name) {
       this.setState({
         [e.target.name]: e.target.value
@@ -71,9 +72,9 @@ class ControlBuilder extends Component {
           onChange={() => this.props.onComponentChange()}
           name={this.props.name}>
           {
-            
+                         
               <FormControlLabel
-                label="Day Mode"
+                
                 control={
                   <Switch color="primary" />
                 }

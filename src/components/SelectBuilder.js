@@ -26,7 +26,7 @@ class SelectBuilder extends Component {
         <Select className="input" value={this.state[this.props.name]} onClick={this.checkValidation} name={this.props.name}>
     
         {this.props.data.map((data, index) =>
-            <MenuItem value={data} key={index}>{data}</MenuItem>)}
+            <MenuItem className="selectItem" value={data} key={index}>{data}</MenuItem>)}
 </Select>
     );
   }
