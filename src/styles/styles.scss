@@ -184,7 +184,7 @@ body {
            {
            & > :first-child {
                 &[class*="jss212"] {
-                    color: #f50057;
+                    color: #cf0957;
                 }
                 color: #fff;
                 
@@ -209,7 +209,35 @@ body {
 
 
 
-    button:disabled {
-        color: #b7c4d0 !important;
+    .button 
+    {
+    &[class*="jss13"] {
+        background-color: #3f5199;
     }
+
+    &[class*="jss14"] {
+        background-color: #cf0957;
+    }
+
+    &:disabled {
+        color: #b7c4d0 !important;
+        background-color: rgba(0, 0, 0, 0.12) !important;
+    }
+}
+
+.fabButton 
+{
+&[class*="jss41"] {
+    background-color: #3f5199;
+}
+
+&[class*="jss42"] {
+    background-color: #cf0957;
+}
+
+&:disabled {
+    color: #b7c4d0 !important;
+    background-color: rgba(0, 0, 0, 0.12) !important;
+}
+}
 }

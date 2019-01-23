@@ -39,7 +39,7 @@
     "jest-resolve": "23.6.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "mini-css-extract-plugin": "0.4.3",
-    "npm": "^6.5.0",
+    "npm": "^6.6.0",
     "office-ui-fabric-react": "^6.125.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
