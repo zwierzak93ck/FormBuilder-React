@@ -14,24 +14,24 @@ class ControlBuilder extends Component {
     this.state = {
       [props.name]: props.value
     }
+    console.log(props)
+    console.log(this.props.value)
+    console.log(this.state[this.props.name])
   }
 
   checkValidation = (e) => {
-    if (e.target.value && e.target.name) {
-      console.log(e.target.checked);
-      console.log(e.target);
-      if(e.target.checked)
-      {
-        console.log(e.target)
-        console.log(document.getElementsByClassName("radio")[0].childNodes)
-        document.getElementsByClassName("radio")[0].className += " checked";
+      if (e.target.value && e.target.name) {
+        this.setState({
+          [e.target.name]: e.target.value
+        }, () => this.props.onComponentChange(this.state));
       }
+  }
+
+  switch = (e) => {
       this.setState({
-        [e.target.name]: e.target.value
-      }, () => {
-       
+        [e.target.name]: e.target.checked
       }, () => this.props.onComponentChange(this.state));
-    } 
+    
   }
 
   setControl = (control) => {
@@ -66,17 +66,11 @@ class ControlBuilder extends Component {
           }
         </FormGroup>
       case "switch":
-        console.log(this.state)
-        return <FormGroup className="input switch"
-          value={this.state[this.props.name]}
-          onChange={() => this.props.onComponentChange()}
-          name={this.props.name}>
-          {
-                         
+        return <FormGroup className="input switch">
+          {          
               <FormControlLabel
-                
                 control={
-                  <Switch color="primary" />
+                  <Switch color="primary" onChange={this.switch} name={this.props.name} checked={this.state[this.props.name]}/>
                 }
                 label="Night Mode" />
           }

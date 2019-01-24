@@ -11,15 +11,17 @@ import { Delete} from '@material-ui/icons';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ControlBuilder from './components/ControlBuilder';
+import Switch from '@material-ui/core/Switch';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      childrensData: [],
-      nightMode: false
-    }
+     this.state = {
+       childrensData: []
+     }
+
+     
   }
 
   addComponent = () => {
@@ -34,26 +36,28 @@ class App extends Component {
     });
   }
 
-  componentWillMount() {
-    var openedDataBase;
-    openDataBase().then(result => {
-      openedDataBase = result;
-    }).then(() => {
-      loadData(openedDataBase).then(result => {
-        this.generateComponents(result);
-      });
-    });
-  }
 
   generateComponents = (data) => {
+    if(data !== undefined) {
     this.setState({
-      childrensData: Object.values(data.data)
-    });
+      childrensData: Object.values(data.data.childrensData),
+      nightMode: data.data.nightMode
+    }, 
+    () => {
+     document.getElementsByTagName("body")[0].className = this.state.nightMode === true ? "night" : "";
+    }
+    );
+  }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    var openedDataBase = await openDataBase();
+
+    var loadedData = await loadData(openedDataBase);
+    //await this.setColorMode(loadedData);
+    await this.generateComponents(loadedData);
+    // var openedDataBase;
     var dataToPush = [];
-    var openedDataBase;
     window.onbeforeunload = () => {
       this.state.childrensData.forEach(element => {
         dataToPush.push(element);
@@ -62,7 +66,7 @@ class App extends Component {
       openDataBase().then(result => {
         openedDataBase = result;
       }).then(() => {
-        addOrUpdateData(openedDataBase, dataToPush);
+        addOrUpdateData(openedDataBase, this.state);
       });
     }
   }
@@ -78,16 +82,21 @@ class App extends Component {
     if (this.state.nightMode === false) {
       this.setState({
         nightMode: true
-      }, () => document.getElementsByTagName("body")[0].className = "night");
+      }, () => {
+        document.getElementsByTagName("body")[0].className = this.state.nightMode === true ? "night" : "";
+      });
     }
     else {
       this.setState({
         nightMode: false
-      }, () => document.getElementsByTagName("body")[0].className = "");
+      }, () => {
+        document.getElementsByTagName("body")[0].className = this.state.nightMode === true ? "night" : "";
+      });
     }
   }
 
   render() {
+
     let child = this.state.childrensData.map((data) => {
       return <Input key={data.key}
         selfIndex={data.key}
@@ -98,9 +107,9 @@ class App extends Component {
         childrensData={data.childrensData}
         answer={data.answer}> </Input>
     });
-    return (
+     return (
+      this.state.nightMode !== undefined  ? 
       <div>
-        
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
@@ -112,12 +121,17 @@ class App extends Component {
           <div className="col-sm-4 offset-sm-4 buttonContainer">
             <Button className="button" variant="contained" color="primary" onClick={this.addComponent}><AddCircleIcon/> Add Input</Button>
             <Fab className="fabButton" color="primary" onClick={this.addComponent}><AddCircleIcon/></Fab>
+
+            
             <ControlBuilder id={Date.now() + Math.random()} name="nightMode" 
                       onComponentChange={this.changeMode} value={this.state.nightMode}
-                  data={["true"]} control="switch"/>
+                   control="switch"/>
+                   
+                   
           </div>
         </div>
-      </div>
+      </div> 
+      : null
     );
   }
 }

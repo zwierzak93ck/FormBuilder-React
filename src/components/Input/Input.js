@@ -141,6 +141,7 @@ class Input extends Component {
             <div className="row">
               <div className="col-sm-12">
                 {child}
+                <p>{this.props.selfIndex}</p>
               </div>
             </div>
           </div>
