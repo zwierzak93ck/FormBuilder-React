@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/FormBuilder-React/static/js/runtime~main.176c3c20.js"
   },
   {
-    "revision": "08173e9815e3ef8736ea",
-    "url": "/FormBuilder-React/static/js/main.08173e98.chunk.js"
+    "revision": "59c70f5ba6d5519096f4",
+    "url": "/FormBuilder-React/static/js/main.59c70f5b.chunk.js"
   },
   {
     "revision": "2c276626f2494adf5d8e",
     "url": "/FormBuilder-React/static/js/1.2c276626.chunk.js"
   },
   {
-    "revision": "08173e9815e3ef8736ea",
+    "revision": "59c70f5ba6d5519096f4",
     "url": "/FormBuilder-React/static/css/main.4b35222f.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/FormBuilder-React/static/css/1.03384071.chunk.css"
   },
   {
-    "revision": "16a304c892e194c47a774a161a2b87f6",
+    "revision": "a5b1d9f843c776416d5c97fa171d5b36",
     "url": "/FormBuilder-React/index.html"
   }
 ];
