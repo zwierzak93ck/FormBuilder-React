@@ -18,7 +18,8 @@ class App extends Component {
     super(props);
 
      this.state = {
-       childrensData: []
+       childrensData: [],
+       nightMode: undefined
      }
 
      
@@ -38,6 +39,8 @@ class App extends Component {
 
 
   generateComponents = (data) => {
+    
+    console.log(data)
     if(data !== undefined) {
     this.setState({
       childrensData: Object.values(data.data.childrensData),
@@ -53,10 +56,13 @@ class App extends Component {
   async componentDidMount() {
     var openedDataBase = await openDataBase();
 
-    var loadedData = await loadData(openedDataBase);
-    //await this.setColorMode(loadedData);
-    await this.generateComponents(loadedData);
-    // var openedDataBase;
+    await loadData(openedDataBase).then((result) => {
+      console.log(result)
+      this.generateComponents(result);
+    });
+
+
+
     var dataToPush = [];
     window.onbeforeunload = () => {
       this.state.childrensData.forEach(element => {
@@ -78,25 +84,31 @@ class App extends Component {
       });
   }
 
-  changeMode = () => {
-    if (this.state.nightMode === false) {
-      this.setState({
-        nightMode: true
-      }, () => {
-        document.getElementsByTagName("body")[0].className = this.state.nightMode === true ? "night" : "";
-      });
-    }
-    else {
-      this.setState({
-        nightMode: false
-      }, () => {
-        document.getElementsByTagName("body")[0].className = this.state.nightMode === true ? "night" : "";
-      });
-    }
-  }
+  changeMode = (a) => {
+    console.log(Object.values(a))
+    console.log(a.nightMode)
+    // if (this.state.nightMode === false || this.state.nightMode === null) {
+    //   this.setState({
+    //     nightMode: true
+    //   }, () => {
+    //     document.getElementsByTagName("body")[0].className = this.state.nightMode === true ? "night" : "";
+    //   });
+    // }
+    // else {
+    //   this.setState({
+    //     nightMode: false
+    //   };
+    //   });
+    // }
+    this.setState({
+      nightMode: a.nightMode
+    }, () => {
+           document.getElementsByTagName("body")[0].className = this.state.nightMode === true ? "night" : ""
+  })
+}
 
   render() {
-
+    {console.log('render')}
     let child = this.state.childrensData.map((data) => {
       return <Input key={data.key}
         selfIndex={data.key}
@@ -107,8 +119,9 @@ class App extends Component {
         childrensData={data.childrensData}
         answer={data.answer}> </Input>
     });
+
      return (
-      this.state.nightMode !== undefined  ? 
+      
       <div>
         <div className="container">
           <div className="row">
@@ -122,16 +135,17 @@ class App extends Component {
             <Button className="button" variant="contained" color="primary" onClick={this.addComponent}><AddCircleIcon/> Add Input</Button>
             <Fab className="fabButton" color="primary" onClick={this.addComponent}><AddCircleIcon/></Fab>
 
-            
+            {this.state.nightMode !== undefined  ? 
             <ControlBuilder id={Date.now() + Math.random()} name="nightMode" 
                       onComponentChange={this.changeMode} value={this.state.nightMode}
                    control="switch"/>
+                   : null}
                    
-                   
+                   {console.log('render ' + this.state.nightMode + ' ' + document.getElementsByName("nightMode").value)}
           </div>
         </div>
       </div> 
-      : null
+      
     );
   }
 }
