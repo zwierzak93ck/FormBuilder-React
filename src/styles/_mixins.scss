@@ -1,0 +1,28 @@
+$landscapePhones: "(min-device-width: 576px) and (max-device-width: 767px)";
+$tablets: "(min-device-width: 768px) and (max-device-width: 991px)";
+$desktops: "(min-device-width: 992px) and (max-device-width: 1199px)";
+$largeDesktops: "(min-device-width: 1200px)";
+
+@mixin landscapePhones {
+  @media #{$landscapePhones} {
+    @content;
+  }
+}
+
+@mixin tablets {
+  @media #{$tablets} {
+    @content;
+  }
+}
+
+@mixin desktops {
+  @media #{$desktops} {
+    @content;
+  }
+}
+
+@mixin largeDesktops {
+  @media #{$largeDesktops} {
+    @content;
+  }
+}

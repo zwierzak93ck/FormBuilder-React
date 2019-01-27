@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import Checkbox from '@material-ui/core/Checkbox';
 import Switch from '@material-ui/core/Switch';
-import '../styles/styles.scss'
+import '../styles/rootStyles.scss'
 
 class ControlBuilder extends Component {
 
@@ -14,24 +14,21 @@ class ControlBuilder extends Component {
     this.state = {
       [props.name]: props.value
     }
-    console.log(props)
-    console.log(this.props.value)
-    console.log(this.state[this.props.name])
   }
 
   checkValidation = (e) => {
-      if (e.target.value && e.target.name) {
-        this.setState({
-          [e.target.name]: e.target.value
-        }, () => this.props.onComponentChange(this.state));
-      }
+    if (e.target.value && e.target.name) {
+      this.setState({
+        [e.target.name]: e.target.value
+      }, () => this.props.onComponentChange(this.state));
+    }
   }
 
   switch = (e) => {
-      this.setState({
-        [e.target.name]: e.target.checked
-      }, () => this.props.onComponentChange(this.state));
-    
+    this.setState({
+      [e.target.name]: e.target.checked
+    }, () => this.props.onComponentChange(this.state));
+
   }
 
   setControl = (control) => {
@@ -67,12 +64,12 @@ class ControlBuilder extends Component {
         </FormGroup>
       case "switch":
         return <FormGroup className="input switch">
-          {          
-              <FormControlLabel
-                control={
-                  <Switch color="primary" onChange={this.switch} name={this.props.name} checked={this.state[this.props.name]}/>
-                }
-                label="Night Mode" />
+          {
+            <FormControlLabel
+              control={
+                <Switch color="primary" onChange={this.switch} name={this.props.name} checked={this.state[this.props.name]} />
+              }
+              label="Night Mode" />
           }
         </FormGroup>
       default:
@@ -88,5 +85,6 @@ class ControlBuilder extends Component {
     );
   }
 }
+
 export default ControlBuilder;
 

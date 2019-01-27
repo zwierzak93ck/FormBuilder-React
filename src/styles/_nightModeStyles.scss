@@ -1,0 +1,83 @@
+.night {
+  background-color: #393939 !important;
+  & .card {
+    background-color: #4d5052;
+    border-color: #333333 !important;
+  }
+
+  & ul {
+    background-color: #4d5052 !important;
+    & .selectItem {
+      color: #b7c4d0;
+    }
+  }
+
+  & .input {
+    & input {
+      color: #b7c4d0;
+      & ul {
+        background-color: red !important;
+      }
+    }
+
+    & label {
+      color: #ababca !important;
+    }
+
+    & div {
+      color: #b7c4d0 !important;
+    }
+
+    &.radio {
+      & > label {
+        & > :first-child {
+          &[class*="jss212"] {
+            color: #cf0957;
+          }
+          color: #fff;
+        }
+        & > :last-child {
+          color: #b7c4d0;
+        }
+      }
+    }
+
+    &.switch {
+      & label {
+        & span {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  & .button {
+    &[class*="jss13"] {
+      background-color: #3f5199;
+    }
+
+    &[class*="jss14"] {
+      background-color: #cf0957;
+    }
+
+    &:disabled {
+      color: #b7c4d0 !important;
+      background-color: rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+
+  & .fabButton {
+    &[class*="jss41"] {
+      background-color: #3f5199;
+    }
+
+    &[class*="jss42"] {
+      background-color: #cf0957;
+    }
+
+    &:disabled {
+      color: #b7c4d0 !important;
+      background-color: rgba(0, 0, 0, 0.12) !important;
+    }
+  }
+}

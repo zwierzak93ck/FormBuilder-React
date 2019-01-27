@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../styles/styles.scss';
+import '../../styles/rootStyles.scss';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -102,9 +102,9 @@ class Input extends Component {
                         value={this.state.answer} name='answer'
                         onChange={this.checkValidation} required></TextField> :
 
-                      <ControlBuilder id={Date.now() + Math.random()} name="answer" value={this.state.answer} 
-                      onComponentChange={this.changeInputType}
-                  data={["Yes", "No"]} control="radio"/>
+                      <ControlBuilder id={Date.now() + Math.random()} name="answer" value={this.state.answer}
+                        onComponentChange={this.changeInputType}
+                        data={["Yes", "No"]} control="radio" />
                     : null
                 }
               </div>
@@ -141,7 +141,6 @@ class Input extends Component {
             <div className="row">
               <div className="col-sm-12">
                 {child}
-                <p>{this.props.selfIndex}</p>
               </div>
             </div>
           </div>
@@ -151,5 +150,6 @@ class Input extends Component {
     );
   }
 }
+
 export default Input;
 

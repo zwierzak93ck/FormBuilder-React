@@ -1,0 +1,42 @@
+@import "_mixins.scss";
+
+.container {
+  max-width: 100% !important;
+
+  @include tablets {
+    max-width: 80% !important;
+  }
+
+  @include desktops {
+    max-width: 80% !important;
+  }
+
+  @include largeDesktops {
+    max-width: 80% !important;
+  }
+}
+
+.buttonContainer {
+  display: inline-block !important;
+  margin-bottom: 10px !important;
+  margin-top: 10px !important;
+  text-align-last: center !important;
+}
+
+.inputContainer {
+  text-align: center;
+  width: 100% !important;
+  margin-bottom: 10px;
+
+  @include tablets {
+    width: 50% !important;
+  }
+
+  @include desktops {
+    width: 50% !important;
+  }
+
+  @include largeDesktops {
+    width: 50% !important;
+  }
+}

@@ -1,0 +1,81 @@
+@import "_nightModeStyles";
+@import "_containersStyles";
+@import "_mixins";
+
+body {
+  background-color: #e6e6ff !important;
+}
+
+.card {
+  margin: 0 auto !important;
+  width: 100% !important;
+  margin-bottom: 20px !important;
+  margin-top: 20px !important;
+  border-radius: 20px !important;
+  border-style: solid !important;
+  border-width: 0.5px !important;
+  border-color: #bfbfbf !important;
+}
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.button {
+  display: none !important;
+
+  @include tablets {
+    display: inline-block !important;
+    width: 40%;
+  }
+
+  @include desktops {
+    display: inline-block !important;
+    width: 40%;
+  }
+
+  @include largeDesktops {
+    display: inline-block !important;
+    width: 40%;
+  }
+}
+
+.fabButton {
+  margin: auto;
+
+  @include tablets {
+    display: none !important;
+  }
+
+  @include desktops {
+    display: none !important;
+  }
+
+  @include largeDesktops {
+    display: none !important;
+  }
+}
+
+.input {
+  text-align-last: center;
+  width: inherit;
+
+  @include tablets {
+    text-align-last: left;
+  }
+
+  @include desktops {
+    text-align-last: left;
+  }
+
+  @include largeDesktops {
+    text-align-last: left;
+  }
+}
+
+.radio {
+  display: inline !important;
+}
+
+.switch {
+  display: inline !important;
+}
