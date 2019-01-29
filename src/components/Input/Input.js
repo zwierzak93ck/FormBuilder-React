@@ -6,8 +6,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { validate } from '../../services/Validation';
 import { saveChildData } from '../../services/Component';
-import SelectBuilder from '../SelectBuilder';
-import ControlBuilder from '../ControlBuilder';
+import SelectBuilder from '../Builders/SelectBuilder';
+import RadioButtonBuilder from '../Builders/RadioButtonBuilder';
 import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -102,9 +102,9 @@ class Input extends Component {
                         value={this.state.answer} name='answer'
                         onChange={this.checkValidation} required></TextField> :
 
-                      <ControlBuilder id={Date.now() + Math.random()} name="answer" value={this.state.answer}
+                      <RadioButtonBuilder id={Date.now() + Math.random()} name="answer" value={this.state.answer}
                         onComponentChange={this.changeInputType}
-                        data={["Yes", "No"]} control="radio" />
+                        data={["Yes", "No"]}/>
                     : null
                 }
               </div>

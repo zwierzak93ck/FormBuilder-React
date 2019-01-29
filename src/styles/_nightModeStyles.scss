@@ -31,8 +31,8 @@
     &.radio {
       & > label {
         & > :first-child {
-          &[class*="jss212"] {
-            color: #cf0957;
+          &[class*="jss150"] {
+            color: #cf0957 !important;
           }
           color: #fff;
         }
@@ -52,11 +52,11 @@
   }
 
   & .button {
-    &[class*="jss13"] {
+    &[class*="jss114"] {
       background-color: #3f5199;
     }
 
-    &[class*="jss14"] {
+    &[class*="jss115"] {
       background-color: #cf0957;
     }
 
@@ -67,11 +67,11 @@
   }
 
   & .fabButton {
-    &[class*="jss41"] {
+    &[class*="jss133"] {
       background-color: #3f5199;
     }
 
-    &[class*="jss42"] {
+    &[class*="jss134"] {
       background-color: #cf0957;
     }
 

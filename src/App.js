@@ -6,7 +6,8 @@ import Fab from '@material-ui/core/Fab';
 import { openDataBase, loadData, addOrUpdateData } from './services/DataBase';
 import { saveChildData } from './services/Component';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import ControlBuilder from './components/ControlBuilder';
+import ControlBuilder from './components/Builders/ControlBuilder';
+import SwitchBuilder from './components/Builders/SwitchBuilder';
 
 class App extends Component {
   constructor(props) {
@@ -115,10 +116,10 @@ class App extends Component {
               <Button className="button" variant="contained" color="primary" onClick={this.addComponent}><AddCircleIcon /> Add Input</Button>
               <Fab className="fabButton" color="primary" onClick={this.addComponent}><AddCircleIcon /></Fab>
 
-
-              <ControlBuilder id={Date.now() + Math.random()} name="nightMode"
-                onComponentChange={this.changeMode} value={this.state.nightMode}
-                control="switch" />
+              <div>
+                <SwitchBuilder id={Date.now() + Math.random()} name="nightMode"
+                  onComponentChange={this.changeMode} value={this.state.nightMode}/>
+              </div>
             </div>
           </div>
         </div>
