@@ -6,7 +6,6 @@ import Fab from '@material-ui/core/Fab';
 import { openDataBase, loadData, addOrUpdateData } from './services/DataBase';
 import { saveChildData } from './services/Component';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import ControlBuilder from './components/Builders/ControlBuilder';
 import SwitchBuilder from './components/Builders/SwitchBuilder';
 
 class App extends Component {
@@ -14,20 +13,20 @@ class App extends Component {
     super(props);
 
     this.state = {
-      childrensData: [],
+      components: [],
       nightMode: undefined
     }
   }
 
   addComponent = () => {
     this.setState({
-      childrensData: [...this.state.childrensData, { key: Date.now() + Math.random() }]
+      components: [...this.state.components, { key: Date.now() + Math.random() }]
     });
   }
 
   deleteComponent = (index) => {
     this.setState({
-      childrensData: this.state.childrensData.filter(data => data.key !== index)
+      components: this.state.components.filter(data => data.key !== index)
     });
   }
 
@@ -36,7 +35,7 @@ class App extends Component {
     if (data !== undefined) {
       this.setState(() => {
         return {
-          childrensData: Object.values(data.data.childrensData),
+          components: Object.values(data.data.components),
           nightMode: data.data.nightMode === undefined ? false : data.data.nightMode
         }
       }, () => {
@@ -62,7 +61,7 @@ class App extends Component {
 
     var dataToPush = [];
     window.onbeforeunload = () => {
-      this.state.childrensData.forEach(element => {
+      this.state.components.forEach(element => {
         dataToPush.push(element);
       });
 
@@ -77,7 +76,7 @@ class App extends Component {
   saveChildData = (data, key) => {
     this.setState(
       {
-        childrensData: Object.values(saveChildData(this.state.childrensData, data, key))[0]
+        components: Object.values(saveChildData(this.state.components, data, key))[0]
       });
   }
 
@@ -90,14 +89,14 @@ class App extends Component {
   }
 
   render() {
-    let child = this.state.childrensData.map((data) => {
+    let child = this.state.components.map((data) => {
       return <Input key={data.key}
         selfIndex={data.key}
         onComponentDelete={this.deleteComponent}
         onComponentChange={this.saveChildData}
         question={data.question}
         inputType={data.inputType}
-        childrensData={data.childrensData}
+        components={data.components}
         answer={data.answer}> </Input>
     });
 

@@ -1,7 +1,7 @@
-const saveChildData = (childrensData, data, key) => {
-  const child = childrensData.filter(x => x.key === key)[0];
-  const childIndex = childrensData.indexOf(child);
-  const result = childrensData.map((element, index) => {
+const saveChildData = (components, data, key) => {
+  const child = components.filter(x => x.key === key)[0];
+  const childIndex = components.indexOf(child);
+  const result = components.map((element, index) => {
     if (childIndex === index) {
       return {
         ...child, ...{
@@ -9,7 +9,7 @@ const saveChildData = (childrensData, data, key) => {
           inputType: data.inputType,
           answer: data.answer,
           condition: data.condition,
-          childrensData: data.childrensData
+          components: data.components
         }
       }
     } else {

@@ -18,7 +18,7 @@ class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childrensData: props.childrensData !== undefined ? Object.values(props.childrensData) : [],
+      components: props.components !== undefined ? Object.values(props.components) : [],
       question: props.question !== undefined ? props.question : '',
       inputType: props.inputType !== undefined ? props.inputType : '',
       answer: props.answer !== undefined ? props.answer : '',
@@ -39,21 +39,21 @@ class Input extends Component {
 
   addComponent = () => {
     this.setState({
-      childrensData: [...this.state.childrensData, { key: Date.now() + Math.random() }]
+      components: [...this.state.components, { key: Date.now() + Math.random() }]
     }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
 
   deleteComponent = (index) => {
-    let result = this.state.childrensData.filter(data => data.key !== index);
+    let result = this.state.components.filter(data => data.key !== index);
 
     this.setState({
-      childrensData: result
+      components: result
     }, () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
 
   saveChildData = (data, key) => {
     this.setState({
-      childrensData: Object.values(saveChildData(this.state.childrensData, data, key))[0]
+      components: Object.values(saveChildData(this.state.components, data, key))[0]
     },
       () => this.props.onComponentChange(this.state, this.props.selfIndex));
   }
@@ -66,7 +66,7 @@ class Input extends Component {
 
   render() {
     let inputs = this.props.parentInputType === undefined ? [this.state.question, this.state.inputType] : [this.state.question, this.state.inputType, this.state.answer, this.state.condition];
-    let child = this.state.childrensData.map((data) => {
+    let child = this.state.components.map((data) => {
       return <Input key={data.key}
         selfIndex={data.key}
         parentInputType={this.state.inputType}
@@ -74,7 +74,7 @@ class Input extends Component {
         onComponentChange={this.saveChildData}
         question={data.question}
         inputType={data.inputType}
-        childrensData={data.childrensData}
+        components={data.components}
         answer={data.answer}
         condition={data.condition}> </Input>
     });
