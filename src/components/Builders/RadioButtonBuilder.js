@@ -14,13 +14,20 @@ class RadioButtonBuilder extends Component {
         }
     }
 
-
+    onChange = (e) => {
+        console.log(e)
+        if (e.target.value && e.target.name) {
+            this.setState({
+                [e.target.name]: e.target.value
+            }, () => this.props.onComponentChange(this.state));
+        }
+    }
 
     render() {
         return (
             <RadioGroup className="input radio" label="Answer"
           value={this.state[this.props.name]}
-          onChange={this.checkValidation} name={this.props.name}>
+          onChange={this.onChange} name={this.props.name}>
           {
             this.props.data.map((data, index) =>
               <FormControlLabel
